@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="1" hostname="localhost" name="FirstTestGroup" tests="1" time="0.000" timestamp="2022-02-24T11:54:32">
+<properties>
+</properties>
+<testcase classname="FirstTestGroup" name="FirstTest" assertions="1" time="0.000" file="CppUTestExample.cpp" line="7">
+<failure message="CppUTestExample.cpp:9: Fail me!" type="AssertionFailedError">
+</failure>
+</testcase>
+<system-out></system-out>
+<system-err></system-err>
+</testsuite>

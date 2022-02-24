@@ -14,7 +14,7 @@ pipeline {
   }
   post {
     always {
-      xunit thresholds: [failed(failureThreshold: '0')], tools: [JUnit(excludesPattern: '', pattern: 'cpputest_*.xml', stopProcessingIfError: true)]
+      junit 'cpputest*.xml'
     }
     cleanup {
       cleanWs()
