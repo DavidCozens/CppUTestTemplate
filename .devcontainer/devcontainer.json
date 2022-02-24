@@ -10,5 +10,6 @@
         "ms-vscode.cpptools-themes",
         "ms-vscode.makefile-tools",
         "jeff-hykin.better-cpp-syntax",
-    ]
+    ],
+	"postStartCommand": "git config --global core.sshCommand /usr/bin/ssh"
 }
