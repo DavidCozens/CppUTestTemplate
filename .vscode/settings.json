@@ -1,3 +1,10 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/workspaces/CppUTestTemplate",
+            "binaryPath": "/workspaces/CppUTestTemplate/tests.out",
+            "binaryArgs": []
+        }
+    ]
 }
