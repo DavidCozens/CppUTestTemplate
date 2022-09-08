@@ -1,4 +1,5 @@
 #include "CppUTest/TestHarness.h"
+#include "Example.h"
 
 TEST_GROUP(FirstTestGroup)
 {
@@ -6,6 +7,6 @@ TEST_GROUP(FirstTestGroup)
 
 TEST(FirstTestGroup, FirstTest)
 {
-   //FAIL("Fail me!");
+   LONGS_EQUAL(42, Example().answer());
 }
 

@@ -1,17 +1,45 @@
+// Makefile
+// ${workspaceRoot} the path of the folder opened in VS Code
+// ${file} the current opened file
+// ${fileBasename} the current opened file's basename
+// ${fileDirname} the current opened file's dirname
+// ${fileExtname} the current opened file's extension
+// ${cwd} the task runner's current working directory on startup
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
+    "options": {
+        "cwd": "${workspaceRoot}"
+    },
+
     "tasks": [
         {
-            "label": "Build",
-            "type": "shell",
+            "label": "build",
             "command": "make",
-            "problemMatcher":"$gcc",
-            "group": {
+            "type": "shell",
+            "group":{
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+        },
+        {
+            "label": "CI run",
+            "command": "make",
+            "type": "shell",
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            },
+            "args": ["ci_run"]
+        },
+        {
+            "label": "clean",
+            "command": "make",
+            "type": "shell",
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            },
+            "args": ["clean"]
         }
     ]
 }
