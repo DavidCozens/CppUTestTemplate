@@ -1,13 +1,14 @@
 LIBNAME = Example
 TARGET = $(LIBNAME)Test.out
-TARGETLIBRARY = Lib$(LIBNAME).a
-LIBS = -lCppUTest -lCppUTestExt -pthread -l$(LIBNAME)
+TARGETLIBRARY = lib$(LIBNAME).a
+LDLIBS = -lCppUTest -lCppUTestExt -pthread -l$(LIBNAME)
+LDFLAGS = -L.
 INCLUDES = -IInterface
 CC = gcc
 CXX = gcc
-CPPFLAGS = $(INCLUDES) -Wall -Werror -MMD -MP
-CFLAGS = -g 
-CXXFLAGS = -g -std=c++17
+CPPFLAGS += $(DEBUGFLAGS) $(INCLUDES) -Wall -Werror -MMD -MP
+CFLAGS =  
+CXXFLAGS = -std=c++17
 SOURCEDIR = Source
 SOURCES := $(shell find $(SOURCEDIR) -name '*.cpp')
 OBJECTS = $(patsubst %.cpp, %.o, $(SOURCES))
@@ -19,11 +20,9 @@ DEPS := $(OBJECTS:.o=.d) $(TESTOBJECTS:.o=.d)
 vpath %.c $(dir $(MAKEFILE_LIST))
 
 
-.PHONY: all default clean run ci_run build
+.PHONY: all clean run ci_run build
 
-default: run
-
-all: run 
+all: run ci_run
 
 build: $(TARGET)
 
@@ -34,7 +33,7 @@ ci_run: $(TARGET)
 	./$< -ojunit
 
 $(TARGET): $(TARGETLIBRARY) $(TESTOBJECTS)
-	g++ $(TESTOBJECTS) $(CPPFLAGS) -L. $(LIBS) -o $@ -no-pie
+	g++ $(LDFLAGS) $(TESTOBJECTS) $(LOADLIBES) $(LDLIBS) -o $@
 
 $(TARGETLIBRARY): $(OBJECTS)
 	$(AR) rs $@ $^

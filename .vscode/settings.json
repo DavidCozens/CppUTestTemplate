@@ -1,9 +1,32 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.makefilePath": "makefile",
+    "makefile.makeDirectory": "",
+    "makefile.configurations": [
+        {
+            "name": "Release"
+        },
+        {
+            "name": "Debug",
+            "makeArgs": [
+                "DEBUGFLAGS=-g"
+            ]
+        }
+    ],
     "makefile.launchConfigurations": [
+        {
+            "cwd": "/workspace",
+            "binaryPath": "/workspace/tests.out",
+            "binaryArgs": []
+        },
         {
             "cwd": "/workspaces/CppUTestTemplate",
             "binaryPath": "/workspaces/CppUTestTemplate/tests.out",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/workspaces/CppUTestTemplate",
+            "binaryPath": "/workspaces/CppUTestTemplate/ExampleTest.out",
             "binaryArgs": []
         }
     ]
