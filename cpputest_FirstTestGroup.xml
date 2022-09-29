@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="localhost" name="FirstTestGroup" tests="1" time="0.000" timestamp="2022-09-28T10:47:47">
-<properties>
-</properties>
-<testcase classname="FirstTestGroup" name="FirstTest" assertions="1" time="0.000" file="Tests/CppUTestExample.cpp" line="8">
-</testcase>
-<system-out></system-out>
-<system-err></system-err>
-</testsuite>

@@ -33,7 +33,7 @@
 
 # Test Results
 *.out.xml
-cpputest_FirstTestGroup.xml
+cpputest_*.xml
 
 # vscode logs
 *.log
