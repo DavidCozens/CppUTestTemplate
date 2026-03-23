@@ -1,45 +1,66 @@
-// Makefile
-// ${workspaceRoot} the path of the folder opened in VS Code
-// ${file} the current opened file
-// ${fileBasename} the current opened file's basename
-// ${fileDirname} the current opened file's dirname
-// ${fileExtname} the current opened file's extension
-// ${cwd} the task runner's current working directory on startup
 {
     "version": "2.0.0",
     "options": {
-        "cwd": "${workspaceRoot}"
+        "cwd": "${workspaceFolder}"
     },
-
     "tasks": [
         {
-            "label": "build",
-            "command": "make",
+            "label": "build and test",
             "type": "shell",
-            "group":{
+            "command": "cmake --build build && build/Tests/ExampleTests",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
         },
         {
-            "label": "CI run",
-            "command": "make",
+            "label": "configure",
             "type": "shell",
-            "group":{
-                "kind": "build",
-                "isDefault": true
-            },
-            "args": ["ci_run"]
+            "command": "cmake",
+            "args": ["-B", "build"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "configure (debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["-B", "build", "-DCMAKE_BUILD_TYPE=Debug"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "test (junit)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "build", "--target", "junit"],
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         },
         {
             "label": "clean",
-            "command": "make",
             "type": "shell",
-            "group":{
-                "kind": "build",
-                "isDefault": true
-            },
-            "args": ["clean"]
+            "command": "cmake",
+            "args": ["--build", "build", "--target", "clean"],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
         }
     ]
 }
