@@ -40,3 +40,9 @@ cpputest_*.xml
 
 # vscode logs
 *.log
+
+# Local devcontainer Dockerfile (not committed - see .devcontainer/Dockerfile header)
+.devcontainer/Dockerfile
+
+# compile_commands.json copied to workspace root by CMake Tools extension
+compile_commands.json

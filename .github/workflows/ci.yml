@@ -16,13 +16,33 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Configure
-        run: cmake -B build
+        run: cmake --preset debug
 
       - name: Build and test
-        run: cmake --build build --target junit
+        run: cmake --build --preset debug --target junit
 
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: build/cpputest_*.xml
+          files: build/debug/cpputest_*.xml
+
+  sanitize:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-3c303cc
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake --preset sanitize
+
+      - name: Build and test
+        run: cmake --build --preset sanitize --target junit
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: build/sanitize/cpputest_*.xml

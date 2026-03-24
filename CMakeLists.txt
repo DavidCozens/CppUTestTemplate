@@ -10,6 +10,25 @@ find_package(CppUTest REQUIRED)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Werror)
 
+option(SANITIZE "Enable AddressSanitizer and UndefinedBehaviourSanitizer" OFF)
+if(SANITIZE)
+    add_compile_options(-fsanitize=address,undefined -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address,undefined)
+endif()
+
+option(COVERAGE "Enable code coverage instrumentation" OFF)
+if(COVERAGE)
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+endif()
+
+option(ENABLE_CLANG_TIDY "Run clang-tidy on all source files during build" OFF)
+if(ENABLE_CLANG_TIDY)
+    find_program(CLANG_TIDY_EXECUTABLE NAMES clang-tidy REQUIRED)
+    set(CMAKE_C_CLANG_TIDY   "${CLANG_TIDY_EXECUTABLE}")
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE}")
+endif()
+
 add_subdirectory(Source)
 
 enable_testing()
