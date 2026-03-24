@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ac4a3f7
+      options: --user root
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
@@ -35,6 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ac4a3f7
+      options: --user root
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
@@ -59,6 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ac4a3f7
+      options: --user root
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
@@ -90,6 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ac4a3f7
+      options: --user root
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
