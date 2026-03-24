@@ -46,3 +46,44 @@ jobs:
         if: always()
         with:
           files: build/sanitize/cpputest_*.xml
+
+  coverage:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-ee85f20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake --preset coverage
+
+      - name: Build and generate coverage report
+        run: cmake --build --preset coverage --target coverage
+
+      - name: Post coverage summary
+        run: |
+          echo '## Coverage Summary' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          lcov --summary build/coverage/coverage.filtered.info 2>&1 >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: build/coverage/coverage_report/
+
+  tidy:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-ee85f20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake --preset tidy
+
+      - name: Build with clang-tidy
+        run: cmake --build --preset tidy
