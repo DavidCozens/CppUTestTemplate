@@ -17,3 +17,33 @@ add_custom_target(junit
     DEPENDS ${PROJECT_NAME}Tests
     COMMENT "Running tests with JUnit XML output"
 )
+
+# Code coverage report using lcov/genhtml.
+# Requires the coverage preset: cmake --preset coverage && cmake --build --preset coverage --target coverage
+# lcov and genhtml must be installed (see .devcontainer/Dockerfile).
+if(COVERAGE)
+    find_program(LCOV_EXECUTABLE lcov)
+    find_program(GENHTML_EXECUTABLE genhtml)
+
+    if(LCOV_EXECUTABLE AND GENHTML_EXECUTABLE)
+        add_custom_target(coverage
+            COMMAND ${LCOV_EXECUTABLE} --zerocounters --directory ${CMAKE_BINARY_DIR}
+            COMMAND ${CMAKE_COMMAND}
+                -DEXECUTABLE=$<TARGET_FILE:${PROJECT_NAME}Tests>
+                -DDIR=${CMAKE_BINARY_DIR}
+                -P ${CMAKE_CURRENT_SOURCE_DIR}/run_junit.cmake
+            COMMAND ${LCOV_EXECUTABLE} --capture --directory ${CMAKE_BINARY_DIR}
+                --output-file ${CMAKE_BINARY_DIR}/coverage.info
+            COMMAND ${LCOV_EXECUTABLE} --remove ${CMAKE_BINARY_DIR}/coverage.info
+                "/usr/*" "${CMAKE_SOURCE_DIR}/Tests/*"
+                --output-file ${CMAKE_BINARY_DIR}/coverage.filtered.info
+            COMMAND ${GENHTML_EXECUTABLE} ${CMAKE_BINARY_DIR}/coverage.filtered.info
+                --output-directory ${CMAKE_BINARY_DIR}/coverage_report
+            DEPENDS ${PROJECT_NAME}Tests
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMENT "Generating coverage report in build/coverage/coverage_report/"
+        )
+    else()
+        message(STATUS "lcov/genhtml not found — 'coverage' target unavailable (requires updated base image)")
+    endif()
+endif()
