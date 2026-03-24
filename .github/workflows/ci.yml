@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-62f0109
+      image: davidcozens/cpputest:sha-ac4a3f7
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
@@ -34,7 +34,7 @@ jobs:
   sanitize:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-62f0109
+      image: davidcozens/cpputest:sha-ac4a3f7
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
@@ -58,7 +58,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-62f0109
+      image: davidcozens/cpputest:sha-ac4a3f7
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
@@ -89,7 +89,7 @@ jobs:
   tidy:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-62f0109
+      image: davidcozens/cpputest:sha-ac4a3f7
     env:
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
