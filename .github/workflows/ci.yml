@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-3c303cc
+      image: davidcozens/cpputest:sha-ee85f20
 
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
   sanitize:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-3c303cc
+      image: davidcozens/cpputest:sha-ee85f20
 
     steps:
       - uses: actions/checkout@v4
