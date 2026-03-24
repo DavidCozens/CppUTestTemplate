@@ -2,6 +2,7 @@
     "name": "CppUTestTemplate",
     "image": "davidcozens/cpputest:sha-ac4a3f7",
     "remoteUser": "developer",
+    "updateRemoteUserUID": false,
     "context": "..",
     "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"],
     "customizations": {
