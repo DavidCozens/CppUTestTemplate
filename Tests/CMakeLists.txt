@@ -38,6 +38,7 @@ if(COVERAGE)
             COMMAND ${LCOV_EXECUTABLE} --remove ${CMAKE_BINARY_DIR}/coverage.info
                 "/usr/*" "${CMAKE_SOURCE_DIR}/Tests/*"
                 --output-file ${CMAKE_BINARY_DIR}/coverage.filtered.info
+                --ignore-errors unused
             COMMAND ${GENHTML_EXECUTABLE} ${CMAKE_BINARY_DIR}/coverage.filtered.info
                 --output-directory ${CMAKE_BINARY_DIR}/coverage_report
             DEPENDS ${PROJECT_NAME}Tests
