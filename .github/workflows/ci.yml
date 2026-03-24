@@ -11,11 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ee85f20
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
 
     steps:
-      - name: Mark workspace safe for git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
       - uses: actions/checkout@v4
 
       - name: Configure
@@ -34,11 +35,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ee85f20
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
 
     steps:
-      - name: Mark workspace safe for git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
       - uses: actions/checkout@v4
 
       - name: Configure
@@ -57,11 +59,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ee85f20
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
 
     steps:
-      - name: Mark workspace safe for git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
       - uses: actions/checkout@v4
 
       - name: Configure
@@ -87,11 +90,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: davidcozens/cpputest:sha-ee85f20
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
 
     steps:
-      - name: Mark workspace safe for git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
       - uses: actions/checkout@v4
 
       - name: Configure
