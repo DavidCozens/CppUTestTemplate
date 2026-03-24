@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-5c26db9
+      image: davidcozens/cpputest:sha-3c303cc
 
     steps:
       - uses: actions/checkout@v4

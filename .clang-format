@@ -1,0 +1,48 @@
+Language: Cpp
+BasedOnStyle: LLVM
+BreakBeforeBraces: Allman
+IndentWidth: 4
+UseTab: Never
+TabWidth: 4
+ColumnLimit: 120
+
+# Spacing
+SpaceBeforeParens: ControlStatements
+SpaceAroundPointerQualifiers: Both
+SpaceBeforeAssignmentOperators: true
+SpaceInEmptyParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceAfterCStyleCast: true
+SpaceBeforeCaseColon: false
+
+# Pointer and qualifier alignment
+PointerAlignment: Left
+QualifierAlignment: Left
+
+# Alignment
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AlignTrailingComments: true
+AlignEscapedNewlines: Left
+
+# Braces and parentheses
+InsertBraces: true
+RemoveParentheses: Leave
+
+# Short constructs - never collapse
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+
+# Switch statements
+IndentCaseLabels: true
+
+# Blank lines
+MaxEmptyLinesToKeep: 1
+SeparateDefinitionBlocks: Always
+
+# Includes
+SortIncludes: false
