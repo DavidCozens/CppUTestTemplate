@@ -34,6 +34,7 @@ if(COVERAGE)
                 -P ${CMAKE_CURRENT_SOURCE_DIR}/run_junit.cmake
             COMMAND ${LCOV_EXECUTABLE} --capture --directory ${CMAKE_BINARY_DIR}
                 --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                --ignore-errors inconsistent
             COMMAND ${LCOV_EXECUTABLE} --remove ${CMAKE_BINARY_DIR}/coverage.info
                 "/usr/*" "${CMAKE_SOURCE_DIR}/Tests/*"
                 --output-file ${CMAKE_BINARY_DIR}/coverage.filtered.info
