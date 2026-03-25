@@ -1,4 +1,7 @@
-file(GLOB SOURCES CONFIGURE_DEPENDS *.c *.cpp)
+set(SOURCES
+    ExampleC.c
+    ExampleCpp.cpp
+)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 

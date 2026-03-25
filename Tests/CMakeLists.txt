@@ -1,4 +1,8 @@
-file(GLOB TEST_SOURCES CONFIGURE_DEPENDS *.cpp)
+set(TEST_SOURCES
+    main.cpp
+    ExampleCTests.cpp
+    ExampleCppTests.cpp
+)
 
 add_executable(${PROJECT_NAME}Tests ${TEST_SOURCES})
 
@@ -35,12 +39,15 @@ if(COVERAGE)
             COMMAND ${LCOV_EXECUTABLE} --capture --directory ${CMAKE_BINARY_DIR}
                 --output-file ${CMAKE_BINARY_DIR}/coverage.info
                 --ignore-errors inconsistent
+                --rc branch_coverage=1
             COMMAND ${LCOV_EXECUTABLE} --remove ${CMAKE_BINARY_DIR}/coverage.info
                 "/usr/*" "${CMAKE_SOURCE_DIR}/Tests/*"
                 --output-file ${CMAKE_BINARY_DIR}/coverage.filtered.info
                 --ignore-errors unused
+                --rc branch_coverage=1
             COMMAND ${GENHTML_EXECUTABLE} ${CMAKE_BINARY_DIR}/coverage.filtered.info
                 --output-directory ${CMAKE_BINARY_DIR}/coverage_report
+                --branch-coverage
             DEPENDS ${PROJECT_NAME}Tests
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMENT "Generating coverage report in build/coverage/coverage_report/"
