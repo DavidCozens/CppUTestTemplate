@@ -30,7 +30,8 @@
     "postStartCommand": "git config --global core.sshCommand /usr/bin/ssh",
     "mounts": [
         "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind",
-        "source=${localEnv:HOME}/.claude,target=/home/developer/.claude,type=bind"
+        "source=${localEnv:HOME}/.claude,target=/home/developer/.claude,type=bind",
+        "source=${localEnv:HOME}/.config/gh,target=/home/developer/.config/gh,type=bind"
     ],
     "remoteEnv": {
         "SSH_AUTH_SOCK": "/ssh-agent"
