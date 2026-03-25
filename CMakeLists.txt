@@ -29,6 +29,31 @@ if(ENABLE_CLANG_TIDY)
     set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE}")
 endif()
 
+option(ENABLE_CPPCHECK "Run cppcheck on all source files during build" OFF)
+if(ENABLE_CPPCHECK)
+    find_program(CPPCHECK_EXECUTABLE NAMES cppcheck)
+    if(CPPCHECK_EXECUTABLE)
+        set(CMAKE_C_CPPCHECK
+            "${CPPCHECK_EXECUTABLE}"
+            "--enable=warning,style,performance,portability"
+            "--error-exitcode=1"
+            "--suppress=missingIncludeSystem"
+            "--inline-suppr"
+            "--std=c11"
+        )
+        set(CMAKE_CXX_CPPCHECK
+            "${CPPCHECK_EXECUTABLE}"
+            "--enable=warning,style,performance,portability"
+            "--error-exitcode=1"
+            "--suppress=missingIncludeSystem"
+            "--inline-suppr"
+            "--std=c++17"
+        )
+    else()
+        message(WARNING "cppcheck not found — ENABLE_CPPCHECK has no effect")
+    endif()
+endif()
+
 add_subdirectory(Source)
 
 enable_testing()
