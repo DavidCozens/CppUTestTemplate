@@ -42,7 +42,10 @@ Refactoring must follow SOLID and DRY principles:
 - **Dependency Inversion** — depend on abstractions, not concretions
 - **DRY** — every piece of knowledge has a single, authoritative representation
 
-100% line and branch coverage is a hard gate, not a target. If a line cannot be covered, the design needs to change.
+The target is 100% line and branch coverage. The CI gate is 90% — if coverage drops below that, the build fails.
+If 100% is proving difficult to achieve, the first response should be to reconsider the design, not lower the bar.
+In practice, following TDD strictly means 100% is the natural outcome. Exceptions exist but are rare; if you find
+yourself needing one, discuss the design first.
 
 ---
 
@@ -80,7 +83,7 @@ boundary that makes the code testable and portable to embedded targets.
 
 | Element | Convention | Example |
 |---|---|---|
-| C public functions | `PackageName_FunctionName` | `LedDriver_TurnOn()` |
+| C public functions | `PascalCase_PascalCase` | `LedDriver_TurnOn()` |
 | C static/private functions | `camelCase` | `calculateChecksum()` |
 | C++ methods | `camelCase` | `getValue()` |
 | Variables | `camelCase` | `sensorReading` |
