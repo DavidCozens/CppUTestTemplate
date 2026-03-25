@@ -154,6 +154,24 @@ jobs:
       - name: Build with clang-tidy
         run: cmake --build --preset tidy
 
+  format:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-975ca56
+      options: --user root
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check clang-format
+        run: |
+          find Interface Source Tests -name '*.c' -o -name '*.cpp' -o -name '*.h' \
+            | xargs clang-format --dry-run --Werror
+
   cppcheck:
     runs-on: ubuntu-latest
     container:
