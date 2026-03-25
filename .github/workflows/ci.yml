@@ -153,3 +153,25 @@ jobs:
 
       - name: Build with clang-tidy
         run: cmake --build --preset tidy
+
+  cppcheck:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-ac4a3f7
+      options: --user root
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install cppcheck
+        run: apt-get update -y && apt-get install -y cppcheck
+
+      - name: Configure
+        run: cmake --preset cppcheck
+
+      - name: Build with cppcheck
+        run: cmake --build --preset cppcheck
