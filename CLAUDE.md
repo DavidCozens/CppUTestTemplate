@@ -1,5 +1,21 @@
 # Claude Code Guidelines
 
+## Git Workflow
+
+All changes to `main` must go via a pull request — direct pushes are blocked by branch protection.
+
+**Branch naming:** `<type>/<short-description>` — e.g. `feat/clang-preset`, `ci/pin-action-shas`
+
+**Merge strategy:** Squash merge only. This keeps a linear history on `main` and means the PR title
+becomes the single commit message — so the PR title must follow Conventional Commits format (see below).
+
+**Before raising a PR:**
+- All CI checks must pass: build-and-test, clang-build-and-test, sanitize, coverage, tidy, cppcheck, format
+- Commits on the branch can be informal (work-in-progress messages are fine)
+- The PR title is what matters — it becomes the permanent commit message on `main`
+
+---
+
 ## Commit Messages
 
 All commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) format.
@@ -84,7 +100,7 @@ boundary that makes the code testable and portable to embedded targets.
 | Element | Convention | Example |
 |---|---|---|
 | C public functions | `PascalCase_PascalCase` | `LedDriver_TurnOn()` |
-| C static/private functions | `camelCase` | `calculateChecksum()` |
+| C static/private functions | `PascalCase` | `calculateChecksum()` |
 | C++ methods | `camelCase` | `getValue()` |
 | Variables | `camelCase` | `sensorReading` |
 | Types / Classes / Structs | `PascalCase` | `MotorController` |
