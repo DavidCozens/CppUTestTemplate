@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-975ca56
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -35,7 +35,7 @@ jobs:
   sanitize:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-975ca56
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -60,7 +60,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-975ca56
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -138,7 +138,7 @@ jobs:
   tidy:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-975ca56
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -157,7 +157,7 @@ jobs:
   cppcheck:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-975ca56
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -166,9 +166,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-
-      - name: Install cppcheck
-        run: apt-get update -y && apt-get install -y cppcheck
 
       - name: Configure
         run: cmake --preset cppcheck
