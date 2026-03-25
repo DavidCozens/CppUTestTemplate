@@ -1,6 +1,6 @@
 {
     "name": "CppUTestTemplate",
-    "image": "davidcozens/cpputest:sha-975ca56",
+    "image": "davidcozens/cpputest:sha-9b8e96e",
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },

@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-975ca56
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -32,10 +32,35 @@ jobs:
         with:
           files: build/debug/cpputest_*.xml
 
+  clang-build-and-test:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-9b8e96e
+      options: --user root
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure
+        run: cmake --preset clang-debug
+
+      - name: Build and test
+        run: cmake --build --preset clang-debug --target junit
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: build/clang-debug/cpputest_*.xml
+
   sanitize:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-975ca56
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -60,7 +85,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-975ca56
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -138,7 +163,7 @@ jobs:
   tidy:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-975ca56
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -157,7 +182,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-975ca56
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -175,7 +200,7 @@ jobs:
   cppcheck:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-975ca56
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
