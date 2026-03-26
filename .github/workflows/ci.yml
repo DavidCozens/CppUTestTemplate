@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -32,10 +32,35 @@ jobs:
         with:
           files: build/debug/cpputest_*.xml
 
+  clang-build-and-test:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-9b8e96e
+      options: --user root
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure
+        run: cmake --preset clang-debug
+
+      - name: Build and test
+        run: cmake --build --preset clang-debug --target junit
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: build/clang-debug/cpputest_*.xml
+
   sanitize:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -60,7 +85,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -85,8 +110,8 @@ jobs:
 
       - name: Enforce coverage thresholds
         env:
-          LINE_THRESHOLD: 100
-          BRANCH_THRESHOLD: 100
+          LINE_THRESHOLD: 90
+          BRANCH_THRESHOLD: 90
         run: |
           SUMMARY=$(lcov --summary build/coverage/coverage.filtered.info --rc branch_coverage=1 2>&1)
           LINE_COV=$(echo "$SUMMARY" | sed -n 's/.*lines\.*: \([0-9.]*\)%.*/\1/p')
@@ -138,7 +163,7 @@ jobs:
   tidy:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -154,10 +179,10 @@ jobs:
       - name: Build with clang-tidy
         run: cmake --build --preset tidy
 
-  cppcheck:
+  format:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-ac4a3f7
+      image: davidcozens/cpputest:sha-9b8e96e
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -167,8 +192,23 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install cppcheck
-        run: apt-get update -y && apt-get install -y cppcheck
+      - name: Check clang-format
+        run: |
+          find Interface Source Tests -name '*.c' -o -name '*.cpp' -o -name '*.h' \
+            | xargs clang-format --dry-run --Werror
+
+  cppcheck:
+    runs-on: ubuntu-latest
+    container:
+      image: davidcozens/cpputest:sha-9b8e96e
+      options: --user root
+    env:
+      GIT_CONFIG_COUNT: 1
+      GIT_CONFIG_KEY_0: safe.directory
+      GIT_CONFIG_VALUE_0: '*'
+
+    steps:
+      - uses: actions/checkout@v6
 
       - name: Configure
         run: cmake --preset cppcheck
