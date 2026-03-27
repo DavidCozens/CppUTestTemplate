@@ -16,12 +16,16 @@ In VS Code, **Ctrl+Shift+B** runs the build and test and reports pass/fail in th
 ## Clang build — `clang-debug`
 
 Builds with Clang 19 as a second compiler, catching portability issues not caught by GCC.
-Run from the host terminal via Docker Compose:
+
+When using the `gcc` devcontainer (normal development), run from a host terminal:
 
 ```bash
 docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --preset clang-debug
 docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --build --preset clang-debug --target junit
 ```
+
+When using the `clang` devcontainer, Ctrl+Shift+B builds with `clang-debug` directly.
+See [Container images](containers.md) for how to switch.
 
 ## Sanitizers — `sanitize`
 
@@ -88,5 +92,5 @@ The `junit` target runs the tests and writes a JUnit-format XML file to the buil
 Used by the VS Code test explorer and the CI pipeline.
 
 ```bash
-cmake --build --preset debug --target junit
+cmake --build --preset <preset> --target junit
 ```

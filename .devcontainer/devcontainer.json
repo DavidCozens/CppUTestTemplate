@@ -1,7 +1,7 @@
 {
     "name": "CppUTestTemplate",
     "dockerComposeFile": "docker-compose.yml",
-    "service": "dev",
+    "service": "gcc",
     "workspaceFolder": "/workspaces/CppUTestTemplate",
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {}
@@ -27,5 +27,5 @@
             ]
         }
     },
-    "postStartCommand": "git config --global core.sshCommand /usr/bin/ssh"
+    "postStartCommand": "git config --global core.sshCommand /usr/bin/ssh && cmake --preset $BUILD_PRESET"
 }

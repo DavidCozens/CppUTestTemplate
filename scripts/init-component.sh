@@ -116,6 +116,6 @@ echo "  Created Tests/${COMPONENT}Test.cpp"
 
 echo ""
 echo "Done. Next steps:"
-echo "  1. cmake --preset debug && cmake --build --preset debug --target junit"
+echo "  1. cmake --preset \$BUILD_PRESET && cmake --build --preset \$BUILD_PRESET --target junit"
 echo "     (expect one failing test — that is correct)"
 echo "  2. Begin TDD: make the failing test pass, then write the next test"

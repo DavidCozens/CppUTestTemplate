@@ -96,6 +96,11 @@
             "name": "coverage",
             "configurePreset": "coverage",
             "output": { "outputOnFailure": true }
+        },
+        {
+            "name": "clang-debug",
+            "configurePreset": "clang-debug",
+            "output": { "outputOnFailure": true }
         }
     ]
 }
