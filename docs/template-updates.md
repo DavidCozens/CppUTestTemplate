@@ -55,8 +55,18 @@ This will:
 - Replace the example source, header, and test files with a `LedDriver` stub
 - Update the VS Code debugger launch configuration
 - Update the README title
+- Update the devcontainer name and workspace path in `.devcontainer/devcontainer.json`
+- Update the volume mount path and working directory in `.devcontainer/docker-compose.yml`
 
-### 7. Build and verify the red bar
+### 7. Open in VS Code devcontainer
+
+Open the cloned folder in VS Code. When prompted, select **Reopen in Container**
+(or use `Ctrl+Shift+P` → "Dev Containers: Reopen in Container"). This starts the
+`gcc` devcontainer service and makes cmake and the build toolchain available.
+
+### 8. Build and verify the red bar
+
+Inside the devcontainer terminal:
 
 ```bash
 cmake --preset $BUILD_PRESET
@@ -66,21 +76,37 @@ cmake --build --preset $BUILD_PRESET --target junit
 Expect exactly one failing test (`LedDriver.NeedsWork`). This confirms the build
 and test harness are working. Begin TDD from here.
 
-### 8. Configure branch protection on the new repository
-
-In the GitHub repository settings, configure branch protection on `main`:
-- Require a pull request before merging
-- Require all status checks to pass: `build-and-test`, `clang-build-and-test`, `sanitize`, `coverage`, `tidy`, `cppcheck`, `format`
-- Require squash merge only
-- Enable automatic branch deletion after merge
-
 ### 9. Commit and push the initialised project
+
+Do this **before** configuring branch protection — the init script changes need to
+land on `main` while direct pushes are still permitted.
 
 ```bash
 git add -A
 git commit -m "feat: initialise LedDriver component"
 git push
 ```
+
+### 10. Enable GitHub Pages for coverage reports
+
+In the GitHub repository settings, under **Pages**:
+- Set **Source** to `GitHub Actions`
+
+Without this, the `deploy-coverage-pages` job will fail on every push to `main`.
+The seven CI check jobs (`build-and-test`, `clang-build-and-test`, `sanitize`, `coverage`,
+`tidy`, `cppcheck`, `format`) are independent of Pages and will pass regardless.
+
+> **Note:** GitHub Pages deployment requires a public repository, or a paid GitHub plan
+> (Pro, Team, or Enterprise) for private repositories. On a free plan with a private repo,
+> `deploy-coverage-pages` will fail — this does not affect the required CI status checks.
+
+### 11. Configure branch protection on the new repository
+
+In the GitHub repository settings, configure branch protection on `main`:
+- Require a pull request before merging
+- Require all status checks to pass: `build-and-test`, `clang-build-and-test`, `sanitize`, `coverage`, `tidy`, `cppcheck`, `format`
+- Require squash merge only
+- Enable automatic branch deletion after merge
 
 ---
 
@@ -108,7 +134,7 @@ Resolve any conflicts (see below), then raise a PR as normal.
 These files are owned by the template. Avoid modifying them in clones so that
 template merges apply cleanly:
 
-- `.devcontainer/docker-compose.yml`
+- `.devcontainer/docker-compose.yml` — initialised once by the init script; do not edit further
 - `.github/workflows/ci.yml`
 - `.github/workflows/release-please.yml`
 - `CMakePresets.json`

@@ -33,6 +33,15 @@ echo "  Updated CMakeLists.txt"
 sed -i "s/Tests\/ExampleTests/Tests\/${COMPONENT}Tests/" "$ROOT/.vscode/launch.json"
 echo "  Updated .vscode/launch.json"
 
+# --- .devcontainer/devcontainer.json: update name and workspaceFolder -----
+sed -i "s/\"name\": \"CppUTestTemplate\"/\"name\": \"$COMPONENT\"/" "$ROOT/.devcontainer/devcontainer.json"
+sed -i "s|/workspaces/CppUTestTemplate|/workspaces/$COMPONENT|g" "$ROOT/.devcontainer/devcontainer.json"
+echo "  Updated .devcontainer/devcontainer.json"
+
+# --- .devcontainer/docker-compose.yml: update volume mount and working_dir -
+sed -i "s|/workspaces/CppUTestTemplate|/workspaces/$COMPONENT|g" "$ROOT/.devcontainer/docker-compose.yml"
+echo "  Updated .devcontainer/docker-compose.yml"
+
 # --- README.md: update title and one-liner --------------------------------
 sed -i "s/^# CppUTestTemplate$/# $COMPONENT/" "$ROOT/README.md"
 sed -i "s/\[component description\]/[TODO: describe $COMPONENT here]/" "$ROOT/README.md"
@@ -64,8 +73,8 @@ extern "C"
 {
 #endif
 
-void ${COMPONENT}_Create(void);
-void ${COMPONENT}_Destroy(void);
+    void ${COMPONENT}_Create(void);
+    void ${COMPONENT}_Destroy(void);
 
 #ifdef __cplusplus
 }
@@ -94,6 +103,7 @@ cat > "$ROOT/Tests/${COMPONENT}Test.cpp" << EOF
 #include "CppUTest/TestHarness.h"
 #include "${COMPONENT}.h"
 
+// clang-format off
 TEST_GROUP(${COMPONENT})
 {
     void setup() override
@@ -106,6 +116,7 @@ TEST_GROUP(${COMPONENT})
         ${COMPONENT}_Destroy();
     }
 };
+// clang-format on
 
 TEST(${COMPONENT}, NeedsWork)
 {

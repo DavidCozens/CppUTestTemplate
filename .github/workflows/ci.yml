@@ -13,6 +13,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       checks: write
       pull-requests: write
     container:
@@ -41,6 +42,7 @@ jobs:
   clang-build-and-test:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       checks: write
       pull-requests: write
     container:
@@ -69,6 +71,7 @@ jobs:
   sanitize:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       checks: write
       pull-requests: write
     container:
@@ -97,6 +100,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       checks: write
       pages: write
       id-token: write
