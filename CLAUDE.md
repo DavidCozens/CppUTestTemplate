@@ -14,6 +14,14 @@ becomes the single commit message — so the PR title must follow Conventional C
 - Commits on the branch can be informal (work-in-progress messages are fine)
 - The PR title is what matters — it becomes the permanent commit message on `main`
 
+**Branch protection rules (configured on GitHub):**
+- Direct pushes to `main` are blocked
+- PRs require all status checks to pass before merging: build-and-test, clang-build-and-test, sanitize, coverage, tidy, cppcheck, format
+- Squash merge only — other merge strategies are disabled
+- Branches are deleted automatically after merge
+
+When cloning this template, reconfigure these branch protection rules on the new repository.
+
 ---
 
 ## Commit Messages
@@ -123,11 +131,26 @@ Names should be self-documenting — prefer clarity over brevity.
 
 ---
 
-## Container Image
+## Container Images
 
-The devcontainer and all CI jobs must use the same image tag. When updating the image:
+Two images are in use:
+
+| Image | Tag | Used by |
+|---|---|---|
+| `davidcozens/cpputest` | `sha-d8df77c` | devcontainer (`dev` service), all CI jobs except clang |
+| `davidcozens/cpputest-clang` | `sha-ddaf55d` | `clang` compose service, `clang-build-and-test` CI job |
+
+The devcontainer uses Docker Compose (`.devcontainer/docker-compose.yml`). VS Code connects to the
+`dev` service. The `clang` service is on-demand — run it from a host terminal:
+
+```
+docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --preset clang-debug
+docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --build --preset clang-debug --target junit
+```
+
+When updating an image:
 
 1. Build and push the new image in the container image repo
-2. Update the SHA tag in `.devcontainer/devcontainer.json` and `.github/workflows/ci.yml` together
+2. Update the SHA tag in `.devcontainer/docker-compose.yml` and `.github/workflows/ci.yml` together
 3. Rebuild the devcontainer and verify the new tooling works locally
 4. Then commit — use `chore: bump container image to <sha>`
