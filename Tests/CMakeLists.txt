@@ -24,7 +24,7 @@ add_custom_target(junit
 
 # Code coverage report using lcov/genhtml.
 # Requires the coverage preset: cmake --preset coverage && cmake --build --preset coverage --target coverage
-# lcov and genhtml must be installed (see .devcontainer/Dockerfile).
+# lcov and genhtml must be installed (available in both container images).
 if(COVERAGE)
     find_program(LCOV_EXECUTABLE lcov)
     find_program(GENHTML_EXECUTABLE genhtml)

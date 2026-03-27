@@ -2,13 +2,14 @@
 
 All builds use CMake presets. Output goes to `build/<preset>/`.
 
-## TDD loop — `debug`
+## TDD loop — `debug` / `clang-debug`
 
-The everyday build for writing and running tests.
+The everyday build for writing and running tests. The active preset depends on the devcontainer
+service in use (`debug` for `gcc`, `clang-debug` for `clang`).
 
 ```bash
-cmake --preset debug
-cmake --build --preset debug --target junit
+cmake --preset $BUILD_PRESET
+cmake --build --preset $BUILD_PRESET --target junit
 ```
 
 In VS Code, **Ctrl+Shift+B** runs the build and test and reports pass/fail in the terminal.

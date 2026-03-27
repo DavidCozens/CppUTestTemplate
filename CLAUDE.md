@@ -108,7 +108,7 @@ boundary that makes the code testable and portable to embedded targets.
 | Element | Convention | Example |
 |---|---|---|
 | C public functions | `PascalCase_PascalCase` | `LedDriver_TurnOn()` |
-| C static/private functions | `PascalCase` | `calculateChecksum()` |
+| C static/private functions | `PascalCase` | `CalculateChecksum()` |
 | C++ methods | `camelCase` | `getValue()` |
 | Variables | `camelCase` | `sensorReading` |
 | Types / Classes / Structs | `PascalCase` | `MotorController` |
@@ -133,24 +133,8 @@ Names should be self-documenting — prefer clarity over brevity.
 
 ## Container Images
 
-Two images are in use:
-
-| Image | Tag | Used by |
-|---|---|---|
-| `davidcozens/cpputest` | `sha-c6cb7a9` | devcontainer (`gcc` service), all CI jobs except clang |
-| `davidcozens/cpputest-clang` | `sha-7188242` | `clang` compose service, `clang-build-and-test` CI job |
-
-The devcontainer uses Docker Compose (`.devcontainer/docker-compose.yml`). VS Code connects to the
-`gcc` service. The `clang` service is on-demand — run it from a host terminal:
-
-```
-docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --preset clang-debug
-docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --build --preset clang-debug --target junit
-```
-
-Each service sets a `BUILD_PRESET` environment variable. VS Code tasks use `${env:BUILD_PRESET}`,
-so changing `"service"` in `devcontainer.json` is the only change needed to switch environments.
-See `docs/containers.md` for the full switching procedure.
+See [`docs/containers.md`](docs/containers.md) for the full image reference, Docker Compose setup,
+and switching procedure.
 
 When updating an image:
 
