@@ -1,6 +1,6 @@
 services:
-  dev:
-    image: davidcozens/cpputest:sha-d8df77c
+  gcc:
+    image: davidcozens/cpputest:sha-c6cb7a9
     volumes:
       - ..:/workspaces/CppUTestTemplate:cached
       - ${SSH_AUTH_SOCK}:/ssh-agent
@@ -12,13 +12,25 @@ services:
       - seccomp:unconfined
     environment:
       - SSH_AUTH_SOCK=/ssh-agent
+      - BUILD_PRESET=debug
     user: developer
     working_dir: /workspaces/CppUTestTemplate
     command: sleep infinity
 
   clang:
-    image: davidcozens/cpputest-clang:sha-ddaf55d
+    image: davidcozens/cpputest-clang:sha-7188242
     volumes:
       - ..:/workspaces/CppUTestTemplate:cached
+      - ${SSH_AUTH_SOCK}:/ssh-agent
+      - ${HOME}/.claude:/home/developer/.claude
+      - ${HOME}/.config/gh:/home/developer/.config/gh
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+      - BUILD_PRESET=clang-debug
     user: developer
     working_dir: /workspaces/CppUTestTemplate
+    command: sleep infinity

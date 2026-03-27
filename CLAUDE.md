@@ -137,16 +137,20 @@ Two images are in use:
 
 | Image | Tag | Used by |
 |---|---|---|
-| `davidcozens/cpputest` | `sha-d8df77c` | devcontainer (`dev` service), all CI jobs except clang |
-| `davidcozens/cpputest-clang` | `sha-ddaf55d` | `clang` compose service, `clang-build-and-test` CI job |
+| `davidcozens/cpputest` | `sha-c6cb7a9` | devcontainer (`gcc` service), all CI jobs except clang |
+| `davidcozens/cpputest-clang` | `sha-7188242` | `clang` compose service, `clang-build-and-test` CI job |
 
 The devcontainer uses Docker Compose (`.devcontainer/docker-compose.yml`). VS Code connects to the
-`dev` service. The `clang` service is on-demand — run it from a host terminal:
+`gcc` service. The `clang` service is on-demand — run it from a host terminal:
 
 ```
 docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --preset clang-debug
 docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --build --preset clang-debug --target junit
 ```
+
+Each service sets a `BUILD_PRESET` environment variable. VS Code tasks use `${env:BUILD_PRESET}`,
+so changing `"service"` in `devcontainer.json` is the only change needed to switch environments.
+See `docs/containers.md` for the full switching procedure.
 
 When updating an image:
 

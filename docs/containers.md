@@ -4,13 +4,13 @@
 
 | Image | Tag | Used by |
 |---|---|---|
-| `davidcozens/cpputest` | `sha-d8df77c` | devcontainer (`dev` service), all CI jobs except clang |
-| `davidcozens/cpputest-clang` | `sha-ddaf55d` | `clang` compose service, `clang-build-and-test` CI job |
+| `davidcozens/cpputest` | `sha-c6cb7a9` | devcontainer (`gcc` service), all CI jobs except clang |
+| `davidcozens/cpputest-clang` | `sha-7188242` | `clang` compose service, `clang-build-and-test` CI job |
 
 ## Docker Compose setup
 
 The devcontainer uses Docker Compose (`.devcontainer/docker-compose.yml`).
-VS Code connects to the `dev` service (GCC). The `clang` service is on-demand only —
+VS Code connects to the `gcc` service (GCC). The `clang` service is on-demand only —
 it starts when you explicitly run a command against it and stops when done.
 
 As cross-compilation targets are added, each gets its own service in the compose file,
@@ -39,8 +39,17 @@ When a new image tag is available:
 
 Both files must always reference the same tag. Never update one without the other.
 
-## Debugging a Clang or cross-compiler issue directly
+## Switching to a different container as the devcontainer
 
-If you need to work interactively in the clang (or other) container, temporarily update
-the `service` in `.devcontainer/devcontainer.json` from `dev` to `clang` (or the relevant service)
-and rebuild. Revert when done.
+Each service in `docker-compose.yml` sets a `BUILD_PRESET` environment variable that
+VS Code tasks pick up automatically. This means a single change — the `service` in
+`.devcontainer/devcontainer.json` — is all that is needed to switch environments.
+Ctrl+Shift+B and all other tasks will use the correct preset for that container.
+
+To work interactively in the clang container (e.g. to debug a Clang-specific issue):
+
+1. In `.devcontainer/devcontainer.json`, change `"service": "gcc"` to `"service": "clang"`
+2. Rebuild the devcontainer (`Ctrl+Shift+P` → "Dev Containers: Rebuild Container")
+3. Work normally — Ctrl+Shift+B will build with `clang-debug`
+
+When done, revert `"service"` back to `"gcc"` and rebuild again.

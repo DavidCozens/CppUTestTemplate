@@ -59,8 +59,8 @@ This will:
 ### 7. Build and verify the red bar
 
 ```bash
-cmake --preset debug
-cmake --build --preset debug --target junit
+cmake --preset $BUILD_PRESET
+cmake --build --preset $BUILD_PRESET --target junit
 ```
 
 Expect exactly one failing test (`LedDriver.NeedsWork`). This confirms the build
