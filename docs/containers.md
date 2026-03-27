@@ -4,8 +4,8 @@
 
 | Image | Tag | Used by |
 |---|---|---|
-| `davidcozens/cpputest` | `sha-d8df77c` | devcontainer (`gcc` service), all CI jobs except clang |
-| `davidcozens/cpputest-clang` | `sha-ddaf55d` | `clang` compose service, `clang-build-and-test` CI job |
+| `davidcozens/cpputest` | `sha-c6cb7a9` | devcontainer (`gcc` service), all CI jobs except clang |
+| `davidcozens/cpputest-clang` | `sha-7188242` | `clang` compose service, `clang-build-and-test` CI job |
 
 ## Docker Compose setup
 

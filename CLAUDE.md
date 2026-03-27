@@ -137,8 +137,8 @@ Two images are in use:
 
 | Image | Tag | Used by |
 |---|---|---|
-| `davidcozens/cpputest` | `sha-d8df77c` | devcontainer (`gcc` service), all CI jobs except clang |
-| `davidcozens/cpputest-clang` | `sha-ddaf55d` | `clang` compose service, `clang-build-and-test` CI job |
+| `davidcozens/cpputest` | `sha-c6cb7a9` | devcontainer (`gcc` service), all CI jobs except clang |
+| `davidcozens/cpputest-clang` | `sha-7188242` | `clang` compose service, `clang-build-and-test` CI job |
 
 The devcontainer uses Docker Compose (`.devcontainer/docker-compose.yml`). VS Code connects to the
 `gcc` service. The `clang` service is on-demand — run it from a host terminal:
