@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest:sha-d8df77c
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -35,7 +35,7 @@ jobs:
   clang-build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest-clang:sha-ddaf55d
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -60,7 +60,7 @@ jobs:
   sanitize:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest:sha-d8df77c
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -85,7 +85,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest:sha-d8df77c
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -163,7 +163,7 @@ jobs:
   tidy:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest:sha-d8df77c
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -182,7 +182,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest:sha-d8df77c
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
@@ -200,7 +200,7 @@ jobs:
   cppcheck:
     runs-on: ubuntu-latest
     container:
-      image: davidcozens/cpputest:sha-9b8e96e
+      image: davidcozens/cpputest:sha-d8df77c
       options: --user root
     env:
       GIT_CONFIG_COUNT: 1
