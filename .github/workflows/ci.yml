@@ -6,9 +6,15 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     container:
       image: davidcozens/cpputest:sha-d8df77c
       options: --user root
@@ -34,6 +40,9 @@ jobs:
 
   clang-build-and-test:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     container:
       image: davidcozens/cpputest-clang:sha-ddaf55d
       options: --user root
@@ -59,6 +68,9 @@ jobs:
 
   sanitize:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     container:
       image: davidcozens/cpputest:sha-d8df77c
       options: --user root
@@ -84,6 +96,10 @@ jobs:
 
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pages: write
+      id-token: write
     container:
       image: davidcozens/cpputest:sha-d8df77c
       options: --user root
