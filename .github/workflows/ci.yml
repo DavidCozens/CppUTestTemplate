@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       checks: write
+      pull-requests: write
     container:
       image: davidcozens/cpputest:sha-d8df77c
       options: --user root
@@ -41,6 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       checks: write
+      pull-requests: write
     container:
       image: davidcozens/cpputest-clang:sha-ddaf55d
       options: --user root
@@ -68,6 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       checks: write
+      pull-requests: write
     container:
       image: davidcozens/cpputest:sha-d8df77c
       options: --user root
