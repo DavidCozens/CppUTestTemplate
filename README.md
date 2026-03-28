@@ -7,7 +7,8 @@
 - [Building and testing](docs/builds.md)
 - [CI pipeline](docs/ci.md)
 - [Container images](docs/containers.md)
-- [Updating from the template](docs/template-updates.md)
+- [Creating a new component from this template](docs/cloning-template.md)
+- [Pulling template updates into a clone](docs/template-updates.md)
 
 ## License
 
