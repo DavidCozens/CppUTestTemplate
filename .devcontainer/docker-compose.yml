@@ -1,6 +1,6 @@
 services:
   gcc:
-    image: davidcozens/cpputest:sha-c6cb7a9
+    image: ghcr.io/davidcozens/cpputest:sha-e7aa8a1
     volumes:
       - ..:/workspaces/CppUTestTemplate:cached
       - ${SSH_AUTH_SOCK}:/ssh-agent
@@ -18,7 +18,7 @@ services:
     command: sleep infinity
 
   clang:
-    image: davidcozens/cpputest-clang:sha-7188242
+    image: ghcr.io/davidcozens/cpputest-clang:sha-6ea3f95
     volumes:
       - ..:/workspaces/CppUTestTemplate:cached
       - ${SSH_AUTH_SOCK}:/ssh-agent
