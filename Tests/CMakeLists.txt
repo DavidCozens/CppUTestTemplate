@@ -43,11 +43,12 @@ if(COVERAGE)
             COMMAND ${LCOV_EXECUTABLE} --remove ${CMAKE_BINARY_DIR}/coverage.info
                 "/usr/*" "${CMAKE_SOURCE_DIR}/Tests/*"
                 --output-file ${CMAKE_BINARY_DIR}/coverage.filtered.info
-                --ignore-errors unused
+                --ignore-errors unused,empty
                 --rc branch_coverage=1
             COMMAND ${GENHTML_EXECUTABLE} ${CMAKE_BINARY_DIR}/coverage.filtered.info
                 --output-directory ${CMAKE_BINARY_DIR}/coverage_report
                 --branch-coverage
+                --ignore-errors empty
             DEPENDS ${PROJECT_NAME}Tests
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMENT "Generating coverage report in build/coverage/coverage_report/"
