@@ -1,5 +1,28 @@
 # Creating a New Component Repository
 
+## Prerequisites
+
+### Required tools
+
+- [VS Code](https://code.visualstudio.com/) with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
+- Git
+- An SSH key configured for GitHub
+- [`gh` CLI](https://cli.github.com/) — optional, only needed for the automated setup commands in steps 10–12
+
+### Platform support
+
+| Platform | Status | Notes |
+|---|---|---|
+| Windows (WSL2) | Tested | All commands must be run inside WSL, not a Windows-native shell. Docker Desktop with the WSL2 backend is required. |
+| Linux (x86_64) | Should work | Docker Engine + Docker Compose plugin. No known caveats. |
+| macOS (Intel) | Untested | Docker Desktop for Mac. Container images are `linux/amd64` — likely works but not verified. |
+| macOS (Apple Silicon) | Not supported | Container images are `linux/amd64` only. Rosetta emulation may be unreliable for sanitizer and debugger features. |
+
+This process has only been tested on Windows with WSL2. If you try it on another platform, feedback is welcome —
+please [open an issue](https://github.com/DavidCozens/CppUTestTemplate/issues).
+
+---
+
 ### 1. Create a new repository on GitHub
 
 Create an empty repository on GitHub for your component (e.g. `LedDriver`).
