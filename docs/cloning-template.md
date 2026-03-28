@@ -62,17 +62,12 @@ Open the cloned folder in VS Code. When prompted, select **Reopen in Container**
 (or use `Ctrl+Shift+P` → "Dev Containers: Reopen in Container"). This starts the
 `gcc` devcontainer service and makes cmake and the build toolchain available.
 
-### 8. Build and verify the red bar
+### 8. Build, verify the red bar, and make it pass
 
-Inside the devcontainer terminal:
+Press `Ctrl+Shift+B` to build and run the tests. Expect exactly one failing test
+(`LedDriver.NeedsWork`) — this confirms the build and test harness are working.
 
-```bash
-cmake --preset $BUILD_PRESET
-cmake --build --preset $BUILD_PRESET --target junit
-```
-
-Expect exactly one failing test (`LedDriver.NeedsWork`). This confirms the build
-and test harness are working. Begin TDD from here.
+Make the test pass before continuing. This is your first TDD cycle.
 
 ### 9. Commit and push the initialised project
 
@@ -98,10 +93,53 @@ The seven CI check jobs (`build-and-test`, `clang-build-and-test`, `sanitize`, `
 > (Pro, Team, or Enterprise) for private repositories. On a free plan with a private repo,
 > `deploy-coverage-pages` will fail — this does not affect the required CI status checks.
 
-### 11. Configure branch protection on the new repository
+Alternatively, using the `gh` CLI:
 
-In the GitHub repository settings, configure branch protection on `main`:
+```bash
+gh api repos/OWNER/REPO/pages -X POST -f build_type=workflow
+```
+
+### 11. Allow GitHub Actions to create pull requests
+
+This is required for the Release Please workflow to open its release PR automatically.
+
+In the GitHub repository settings, under **Actions** → **General** → **Workflow permissions**:
+- Select **Read and write permissions**
+- Check **Allow GitHub Actions to create and approve pull requests**
+
+Alternatively, using the `gh` CLI:
+
+```bash
+gh api repos/OWNER/REPO/actions/permissions/workflow \
+  -X PUT \
+  -f default_workflow_permissions=write \
+  -F can_approve_pull_request_reviews=true
+```
+
+### 12. Configure branch protection on the new repository
+
+In the GitHub repository settings, under **Branches** → **Add branch protection rule** for `main`:
 - Require a pull request before merging
 - Require all status checks to pass: `build-and-test`, `clang-build-and-test`, `sanitize`, `coverage`, `tidy`, `cppcheck`, `format`
 - Require squash merge only
 - Enable automatic branch deletion after merge
+
+Alternatively, using the `gh` CLI:
+
+```bash
+gh api repos/OWNER/REPO/branches/main/protection \
+  -X PUT \
+  --input - <<'EOF'
+{
+  "required_status_checks": {
+    "strict": false,
+    "contexts": ["build-and-test", "clang-build-and-test", "sanitize", "coverage", "tidy", "cppcheck", "format"]
+  },
+  "enforce_admins": false,
+  "required_pull_request_reviews": {
+    "required_approving_review_count": 0
+  },
+  "restrictions": null
+}
+EOF
+```
