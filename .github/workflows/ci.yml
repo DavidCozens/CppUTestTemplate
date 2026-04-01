@@ -30,7 +30,7 @@ jobs:
         run: cmake --preset debug
 
       - name: Build and test
-        run: cmake --build --preset debug --target junit
+        run: cmake --build --preset debug --target junit ExampleProgram
 
       - name: Test Report
         uses: dorny/test-reporter@v3
