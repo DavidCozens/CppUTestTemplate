@@ -1,6 +1,6 @@
 services:
   gcc:
-    image: ghcr.io/davidcozens/cpputest:sha-0ff95dc
+    image: ghcr.io/davidcozens/cpputest:sha-6acaccf
     volumes:
       - ..:/workspaces/CppUTestTemplate:cached
       - ${SSH_AUTH_SOCK}:/ssh-agent
