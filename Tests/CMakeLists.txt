@@ -39,8 +39,8 @@ if(COVERAGE)
             COMMAND ${LCOV_EXECUTABLE} --capture --directory ${CMAKE_BINARY_DIR}
                 --output-file ${CMAKE_BINARY_DIR}/coverage.info
                 --rc branch_coverage=1
-            COMMAND ${LCOV_EXECUTABLE} --remove ${CMAKE_BINARY_DIR}/coverage.info
-                "/usr/*" "/home/cpputest/*" "${CMAKE_SOURCE_DIR}/Tests/*"
+            COMMAND ${LCOV_EXECUTABLE} --extract ${CMAKE_BINARY_DIR}/coverage.info
+                "${CMAKE_SOURCE_DIR}/Source/*"
                 --output-file ${CMAKE_BINARY_DIR}/coverage.filtered.info
                 --rc branch_coverage=1
             COMMAND ${GENHTML_EXECUTABLE} ${CMAKE_BINARY_DIR}/coverage.filtered.info
