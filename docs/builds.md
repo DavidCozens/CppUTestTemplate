@@ -28,6 +28,16 @@ docker compose -f .devcontainer/docker-compose.yml run --rm clang cmake --build 
 When using the `clang` devcontainer, Ctrl+Shift+B builds with `clang-debug` directly.
 See [Container images](containers.md) for how to switch.
 
+## Windows build — `msvc-debug`
+
+Builds with MSVC on Windows. This preset is only visible on Windows.
+See [Windows development](windows.md) for setup instructions.
+
+```powershell
+cmake --preset msvc-debug
+cmake --build --preset msvc-debug --target junit
+```
+
 ## Sanitizers — `sanitize`
 
 Catches memory errors, use-after-free, and undefined behaviour at runtime.
