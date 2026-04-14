@@ -6,7 +6,7 @@ the Windows build is a required CI check and works locally.
 
 ## Prerequisites
 
-1. **Visual Studio 2022** (Community edition is fine) with the
+1. **Visual Studio** (Community edition is fine) with the
    **"Desktop development with C++"** workload. This provides MSVC, CMake,
    and the Windows SDK.
 
