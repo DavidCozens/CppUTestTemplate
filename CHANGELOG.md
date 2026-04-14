@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/DavidCozens/CppUTestTemplate/compare/v1.1.0...v1.2.0) (2026-04-14)
+
+
+### Features
+
+* add Windows MSVC CI build ([#22](https://github.com/DavidCozens/CppUTestTemplate/issues/22)) ([d363111](https://github.com/DavidCozens/CppUTestTemplate/commit/d3631118ab826f3208bbebc90d3793b665293154))
+
 ## [1.1.0](https://github.com/DavidCozens/CppUTestTemplate/compare/v1.0.0...v1.1.0) (2026-04-01)
 
 
