@@ -8,6 +8,7 @@ GitHub Actions runs all jobs in parallel on every push and pull request to `main
 |---|---|---|
 | `build-and-test` | `debug` | Test results annotated on PR |
 | `clang-build-and-test` | `clang-debug` | Second compiler check using Clang 19 |
+| `windows-build-and-test` | `msvc-debug` | MSVC build on Windows — test results annotated on PR |
 | `sanitize` | `sanitize` | ASan + UBSan — test results annotated on PR |
 | `coverage` | `coverage` | Summary in Actions UI; HTML report deployed to GitHub Pages on merge to `main` |
 | `tidy` | `tidy` | clang-tidy — pass/fail with errors in job log |

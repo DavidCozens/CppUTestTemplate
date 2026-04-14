@@ -247,6 +247,33 @@ jobs:
       - name: Build with cppcheck
         run: cmake --build --preset cppcheck
 
+  windows-build-and-test:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install CppUTest
+        run: |
+          vcpkg install cpputest
+          echo "VCPKG_ROOT=$env:VCPKG_INSTALLATION_ROOT" >> $env:GITHUB_ENV
+
+      - name: Configure
+        run: cmake --preset msvc-debug
+
+      - name: Build and test
+        run: cmake --build --preset msvc-debug --target junit
+
+      - name: Test Report
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: Test Results (MSVC)
+          path: build/msvc-debug/cpputest_*.xml
+          reporter: java-junit
+
   bdd:
     needs: build-and-test
     runs-on: ubuntu-latest

@@ -6,7 +6,7 @@ set(TEST_SOURCES
 
 add_executable(${PROJECT_NAME}Tests ${TEST_SOURCES})
 
-target_link_libraries(${PROJECT_NAME}Tests PRIVATE ${PROJECT_NAME} CppUTest CppUTestExt pthread)
+target_link_libraries(${PROJECT_NAME}Tests PRIVATE ${PROJECT_NAME} CppUTest CppUTestExt Threads::Threads)
 
 # Standard CppUTest console output via ctest -V
 add_test(NAME ${PROJECT_NAME}Tests COMMAND ${PROJECT_NAME}Tests)
