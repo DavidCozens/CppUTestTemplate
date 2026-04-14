@@ -7,25 +7,14 @@ the Windows build is a required CI check and works locally.
 ## Prerequisites
 
 1. **Visual Studio** (Community edition is fine) with the
-   **"Desktop development with C++"** workload. This provides MSVC, CMake,
+   **"Desktop development with C++"** workload — provides MSVC, CMake,
    and the Windows SDK.
 
 2. **Git** — [git-scm.com](https://git-scm.com/download/win)
 
-3. **vcpkg** — the C++ package manager, used to install CppUTest.
-
-   ```powershell
-   git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
-   C:\vcpkg\bootstrap-vcpkg.bat
-   ```
-
-   Set the `VCPKG_ROOT` environment variable permanently:
-
-   ```powershell
-   [Environment]::SetEnvironmentVariable("VCPKG_ROOT", "C:\vcpkg", "User")
-   ```
-
-   Restart your terminal after setting this.
+3. **vcpkg** — follow the [official install guide](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
+   The `VCPKG_ROOT` environment variable must be set — the CMake preset
+   uses it to locate the vcpkg toolchain file.
 
 ## Installing CppUTest
 
