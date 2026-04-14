@@ -7,12 +7,17 @@ the Windows build is a required CI check and works locally.
 ## Prerequisites
 
 1. **Visual Studio** (Community edition is fine) with the
-   **"Desktop development with C++"** workload — provides MSVC, CMake,
-   and the Windows SDK.
+   **"Desktop development with C++"** workload — provides MSVC and the
+   Windows SDK.
 
-2. **Git** — [git-scm.com](https://git-scm.com/download/win)
+2. **CMake** — [cmake.org/download](https://cmake.org/download/).
+   During install, select **"Add CMake to the system PATH"**. Visual
+   Studio bundles its own copy of CMake, but it is not added to the PATH
+   automatically.
 
-3. **vcpkg** — follow the [official install guide](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
+3. **Git** — [git-scm.com](https://git-scm.com/download/win)
+
+4. **vcpkg** — follow the [official install guide](https://learn.microsoft.com/en-us/vcpkg/get_started/get-started).
    The `VCPKG_ROOT` environment variable must be set — the CMake preset
    uses it to locate the vcpkg toolchain file.
 
