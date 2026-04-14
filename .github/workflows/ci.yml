@@ -262,11 +262,8 @@ jobs:
       - name: Configure
         run: cmake --preset msvc-debug -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
 
-      - name: Build
-        run: cmake --build --preset msvc-debug
-
-      - name: Test
-        run: ctest --preset msvc-debug
+      - name: Build and test
+        run: cmake --build --preset msvc-debug --target junit
 
       - name: Test Report
         uses: dorny/test-reporter@v3
